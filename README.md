@@ -140,7 +140,7 @@ to respond to the user. If somebody like to fix this example... be my guest.
 
 ***THE SAME CODE***, using **wait.for** (sequential logic - sequential programming):
 ```javascript
-var db = require("some-db-abstraction"), wait=require('wait.for');
+var db = require("some-db-abstraction"), wait=require('wait.for-ES6');
 
 function* handleWithdrawal(req,res){  
 	try {
@@ -165,12 +165,12 @@ More examples:
 
 * see [tests.js] (http://github.com/luciotato/waitfor-ES6/blob/master/tests.js) for more examples
 * see [waitfor-demo.js](http://github.com/luciotato/waitfor/blob/master/waitfor-demo.js.js) for a 
-dummy blog server demo using sequential programming
+dummy server demo using sequential programming
 
 Usage: 
 -
 ```javascript
-var wait=require('wait.for');
+var wait=require('wait.for-ES6');
 
 // launch a new fiber (emulated by a generator)
 wait.launchFiber(my_seq_function, arg,arg,...)
