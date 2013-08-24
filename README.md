@@ -6,21 +6,21 @@ Sequential programming for node.js *and the browser*, end of callback hell.
 ***Simple, straightforward abstraction.***
 
 By using **wait.for**, you can call any nodejs standard async function in sequential/Sync mode, waiting for result data, 
-without blocking node's event loop
+without blocking node's event loop.
 
 A nodejs standard async function is a function in which the last parameter is a callback: function(err,data)
 
-Advantages:
-* Avoid callback hell / pyramid of doom
-* Simpler, sequential programming when required, without blocking node's event loop
-* Simpler, try-catch exception programming. (default callback handler is: if (err) throw err; else return data)
-* You can also launch multiple parallel non-concurrent fibers.
-* No multi-threaded debugging nightmares, only one fiber running at a given time.
-* Can use any node-standard async function with callback(err,data) as last parameter.
-* Plays along with node programming style. Write your async functions with callback(err,data), but use them in sequential/SYNC mode when required.
-* Plays along with node cluster. You design for one thread/processor, then scale with cluster on multicores.
-
-
+*Advantages:*
+<ul>
+<li> Avoid callback hell / pyramid of doom
+<li> Simpler, sequential programming when required, without blocking node's event loop
+<li> Simpler, try-catch exception programming. (default callback handler is: if (err) throw err; else return data)
+<li> You can launch multiple parallel non-concurrent fibers.
+<li> No multi-threaded debugging nightmares, only one fiber running at a given time.
+<li> Can use any node-standard async function with callback(err,data) as last parameter.
+<li> Plays along with node programming style. Write your async functions with callback(err,data), but use them in sequential/SYNC mode when required.
+<li> Plays along with node cluster. You design for one thread/processor, then scale with cluster on multicores.
+</ul>
 
 - WARNING: Bleeding Edge -
 --
@@ -39,7 +39,7 @@ Example:
 
     node --harmony waitfor-demo.js
 
-stable Wait.for
+Wait.for on stable Node
 --
 If you want to use ***wait.for*** but you can't use (unstable) node and/or ES6-Harmony
 you can try the<br>
