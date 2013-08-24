@@ -51,6 +51,10 @@ Install (not yet):
 
 Examples:
 -
+```javascript
+// (inside a generator) call async function fs.readfile(path,enconding), wait for result, return data
+console.log('contents of file: ' yield [ fs.readfile, path, enconding ]);
+```
 
 DNS testing, *using pure node.js* (a little of callback hell):
 ```javascript
@@ -85,18 +89,16 @@ function* test(){
 
 wait.launchFiber(test); 
 ```
-Alternative, **fancy syntax**:
+Alternative, **fancy syntax**, omiting *wait.for* (see "The funny thing is...")
 ```javascript
 var dns = require("dns"), wait=require('wait.for-ES6');
 
 function* test(){
-	var addresses = yield [dns.resolve4, "google.com"];
-	for (var i = 0; i < addresses.length; i++) {
-		var a = addresses[i];
-		console.log("reverse for " + a + ": " + JSON.stringify( yield [dns.reverse,a] ));
-	}
+    var addresses = yield [dns.resolve4, "google.com"];
+    for( let i=0; i<addresses.length; i++)
+        var a=addresses[i];
+        console.log("reverse for " + a + ": " + JSON.stringify( yield [dns.reverse,a] ));
 }
-
 wait.launchFiber(test); 
 ```
 
@@ -179,12 +181,73 @@ function* my_seq_function(arg,arg...){
     // call myObj.querydata(arg1,arg2), wait for result, return data
     var myObjData = yield wait.forMethod(myObj,'queryData', arg1, arg2);
     console.log(myObjData.toString());
+
+    // call async function fs.readfile(path,enconding), wait for result, return data
+    console.log('contents of file: ' yield [ fs.readfile, path, enconding ]);
 }
 
 // fiber (generator)
 function* handler(req,res){
     res.end ( markdown ( yield [ fs.readfile, 'post-'+req.query.postnum, 'utf8' ] );
 }
+```
+
+
+The funny thing is...
+--
+Several people ask me: "why not generators?". So I started looking for information on such a migration. 
+After a quick search, the migration did not seem possible:
+(According to this: http://stackoverflow.com/questions/18293563/can-node-fibers-be-implemented-using-es6-generators
+and this: http://calculist.org/blog/2011/12/14/why-coroutines-wont-work-on-the-web)
+
+Anyway, the basic tools of ES6 generators were very similar to the concept of fibers, so I started trying to port **wait.for** to ES6...
+
+It didn't looked good, ***but it went much better than expected!***
+
+The funny thing is, the implementation of the core function ***wait.for(async,arg...)***, using ES6 generators is:
+
+```javascript
+wait.for = function( asyncFn ) { return arguments; }
+```
+Yes, just return arguments.
+
+You use ***wait.for*** inside a generator (function*) in conjunction with new JS/ES6 ***yield*** keyword, as in:
+
+```javascript
+var data = yield wait.for ( fs.readFile, '/etc/somefile' );
+```
+
+Compare it to **wait.for** based on node-fibers:
+
+```javascript
+wait.for = function(asyncFn){ 
+        var newargs=Array.prototype.slice.call(arguments,1); // remove function from args
+        return Wait.applyAndWait(null,fn,newargs); 
+    }
+```
+
+**wait.for** based on node-fibers *actually does something*, calling Wait.applyAndWait. 
+In contrast ES6 based implementation of **wait.for(asyncFn)** does basically nothing (the magic control flow resides in *yield*)
+
+<h2>Surprisingly, ES6 based implementation of <i>wait.for</i> is almost a no-op, you can even completely omit it...</h2></blockquote>
+
+Given that evaluating ***wait.for*** return its arguments, the call can be replaced with an object literal, which is an array-like object. It results that:
+```javascript
+
+wait.for( asyncFn, arg1, arg2 )  // return arguments
+=== {0:asyncFn, 1:arg1, 2:arg2 } // is equivalent to...
+~= [ asyncFn, arg1, arg2 ] // is similar to...
+```
+so, the following two snippets are equivalent (inside a generator launched via ***wait.launchFiber(generator)***):
+
+```javascript
+// call an async function and wait for results, (wait.for syntax):
+var data = yield wait.for ( fs.readFile, '/etc/somefile', 'utf8' );
+console.log(data);
+
+// call an async function and wait for results, (fancy syntax):
+var data = yield [ fs.readFile, '/etc/passwd', 'utf8' ];
+console.log(data);
 ```
 
 
