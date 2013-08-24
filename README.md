@@ -52,8 +52,9 @@ Install (not yet):
 Examples:
 -
 ```javascript
-// (inside a generator) call async function fs.readfile(path,enconding), wait for result, return data
-console.log('contents of file: ' yield [ fs.readfile, path, enconding ]);
+// (inside a generator) call async function fs.readfile(path,enconding), 
+// wait for result, return data
+console.log('contents of file: ', yield [ fs.readfile, '/etc/file.txt', 'utf8']);
 ```
 
 DNS testing, *using pure node.js* (a little of callback hell):
@@ -195,7 +196,7 @@ function* handler(req,res){
 
 <a id="funny"></a>The funny thing is...
 --
-After uploading the original **wait.for** based on node-fibers, several people ask me: "why not generators?". So I started looking for information on such a migration. 
+After uploading the original **wait.for** based on node-fibers, several people ask me: "why not base it on ES6-Harmony generators?". So I started looking for information on such a migration. 
 After a quick search, the migration did not seem possible:
 (According to this: http://stackoverflow.com/questions/18293563/can-node-fibers-be-implemented-using-es6-generators
 and this: http://calculist.org/blog/2011/12/14/why-coroutines-wont-work-on-the-web)
