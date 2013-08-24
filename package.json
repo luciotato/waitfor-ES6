@@ -1,7 +1,7 @@
 {
   "name": "wait.for-es6"
   ,"version": "0.0.1"
-  ,"description": "Sequential programming for node.js, end of callback hell"
+  ,"description": "Sequential programming for node.js -and the browser-. End of callback hell - Original Wait.for, implemented using upcoming javascript/ES6-Harmony generators"
   
   ,"author": {
     "name": "Lucio Tato"
@@ -9,25 +9,23 @@
     ,"url":"http://github.com/luciotato"
   }
   ,"keywords": [
-    "fiber", "fibers", "coroutine", "thread", "sycn", "async"
+    "fiber", "fibers", "generator", "coroutine", "thread", "sycn", "async"
     ,"parallel", "worker", "future", "promise"
     ,"wait","Wait.for","callback hell","piramyd of doom"]
     
-  ,"homepage": "http://github.com/luciotato/waitfor"
+  ,"homepage": "http://github.com/luciotato/waitfor-ES6"
   ,"license" : "Creative Commons, MIT"
-  ,"bugs": "http://github.com/luciotato/waitfor/issues"
+  ,"bugs": "http://github.com/luciotato/waitfor-ES6/issues"
   ,"repository": {
     "type": "git"
-    ,"url": "git://github.com/luciotato/waitfor.git"
+    ,"url": "git://github.com/luciotato/waitfor-ES6.git"
   }
   ,"main": "waitfor.js"
   , "engines": { 
-  	"node": ">=0.5.2" 
+  	"node": ">=0.11.6" 
   	}
-  ,"dependencies": {
-	"fibers": ">=1.0.1"
-	}
  ,"scripts": {
-    "test": "node tests"
+    "test": "node --harmony tests"
+    ,"parallel": "node --harmony parallel-tests.js"
   }
 }
