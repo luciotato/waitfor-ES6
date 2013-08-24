@@ -17,8 +17,10 @@ Advantages:
 * You can also launch multiple parallel non-concurrent fibers.
 * No multi-threaded debugging nightmares, only one fiber running at a given time.
 * Can use any node-standard async function with callback(err,data) as last parameter.
-* Plays along with node programming style, you write your async functions with callback(err,data), but you can use them in sequential/SYNC mode when required.
+* Plays along with node programming style. Write your async functions with callback(err,data), but use them in sequential/SYNC mode when required.
 * Plays along with node cluster. You design for one thread/processor, then scale with cluster on multicores.
+
+
 
 - WARNING: Bleeding Edge -
 --
