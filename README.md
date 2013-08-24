@@ -3,7 +3,7 @@ Wait.for-ES6
 
 Sequential programming for node.js *and the browser*, end of callback hell.
 
-Simple, straightforward abstraction.
+***Simple, straightforward abstraction.***
 
 By using **wait.for**, you can call any nodejs standard async function in sequential/Sync mode, waiting for result data, 
 without blocking node's event loop
@@ -24,13 +24,13 @@ Advantages:
 --
 
 This is a port of the original [Wait.for] (http://github.com/luciotato/waitfor),
-implemented using ***the upcoming*** javascript/ES6-Harmony generators,
-and it also requires ***bleeding edge unstable node v0.11.6, plus the --harmony command line option***
+now implemented using ***the upcoming*** javascript/ES6-Harmony generators.
+It requires ***bleeding edge unstable node v0.11.6, plus the --harmony command line option***
 
 This lib is based on ECMAScript 6, which is the next version of the javascript standard, code-named "Harmony",
 with a target release date of December 2013.
 
-This lib also uses bleeding edge V8 Harmony features, so you’ll need to use the latest (unstable) nodejs version wich today is v0.11.6 
+This lib also uses bleeding edge V8 Harmony features, so you’ll need to use the latest (unstable) nodejs version (v0.11.6)
 and also pass the --harmony flag when executing node.
 
 Example:
