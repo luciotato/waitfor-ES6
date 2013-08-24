@@ -260,4 +260,4 @@ Roadmap
  * Parallel execution, launch one fiber for each array item, waits until all fibers complete execution.
    * **function parallel.map(arr,fn,callback)** return transformed array;
    * **function parallel.filter(arr,fn,callback)** return filtered array;
-   * Status: ***WORKING PROTOYPES*** in [paralell-tests.js](http://github.com/luciotato/waitfor-ES6/blob/master/paralell-tests.js)
+   * Status: ***WORKING PROTOYPES*** in [parallel-tests.js](http://github.com/luciotato/waitfor-ES6/blob/master/parallel-tests.js)
