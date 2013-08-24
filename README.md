@@ -92,7 +92,7 @@ function* test(){
 
 wait.launchFiber(test); 
 ```
-Alternative, **fancy syntax**, *omiting* **wait.for** (see [The funny thing is...](#funny))
+Alternative, **fancy syntax**, *omiting* **wait.for** (see [The funny thing is...](#the-funny-thing-is))
 ```javascript
 var dns = require("dns"), wait=require('wait.for-ES6');
 
@@ -196,7 +196,7 @@ function* handler(req,res){
 ```
 
 
-<a id="funny"></a>The funny thing is...
+The funny thing is...
 --
 After uploading the original **wait.for** based on node-fibers, several people ask me: "why not base it on ES6-Harmony generators?". So I started looking for information on such a migration. 
 After a quick search, the migration did not seem possible:
