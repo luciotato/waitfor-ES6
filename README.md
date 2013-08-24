@@ -89,7 +89,7 @@ function* test(){
 
 wait.launchFiber(test); 
 ```
-Alternative, **fancy syntax**, omiting *wait.for* (see "The funny thing is...")
+Alternative, **fancy syntax**, *omiting* **wait.for** (see [The funny thing is...](#funny))
 ```javascript
 var dns = require("dns"), wait=require('wait.for-ES6');
 
@@ -193,9 +193,9 @@ function* handler(req,res){
 ```
 
 
-The funny thing is...
+<a id="funny"></a>The funny thing is...
 --
-Several people ask me: "why not generators?". So I started looking for information on such a migration. 
+After uploading the original **wait.for** based on node-fibers, several people ask me: "why not generators?". So I started looking for information on such a migration. 
 After a quick search, the migration did not seem possible:
 (According to this: http://stackoverflow.com/questions/18293563/can-node-fibers-be-implemented-using-es6-generators
 and this: http://calculist.org/blog/2011/12/14/why-coroutines-wont-work-on-the-web)
@@ -211,12 +211,6 @@ wait.for = function( asyncFn ) { return arguments; }
 ```
 Yes, just return arguments.
 
-You use ***wait.for*** inside a generator (function*) in conjunction with new JS/ES6 ***yield*** keyword, as in:
-
-```javascript
-var data = yield wait.for ( fs.readFile, '/etc/somefile' );
-```
-
 Compare it to **wait.for** based on node-fibers:
 
 ```javascript
@@ -226,8 +220,15 @@ wait.for = function(asyncFn){
     }
 ```
 
-**wait.for** based on node-fibers *actually does something*, calling Wait.applyAndWait. 
+**wait.for** based on node-fibers *actually does something*: calls ***Wait.applyAndWait*** 
+
 In contrast ES6 based implementation of **wait.for(asyncFn)** does basically nothing (the magic control flow resides in *yield*)
+
+You use ***wait.for*** inside a generator (function*) in conjunction with new JS/ES6 ***yield*** keyword, as in:
+
+```javascript
+var data = yield wait.for ( fs.readFile, '/etc/somefile' );
+```
 
 <h2>Surprisingly, ES6 based implementation of <i>wait.for</i> is almost a no-op, you can even completely omit it...</h2></blockquote>
 
