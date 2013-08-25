@@ -1,6 +1,6 @@
 "use strict";
 var util = require("util");
-var dns = require("dns");
+var fs = require('fs'), dns = require("dns");
 var wait = require("./waitfor");
 
 
@@ -69,6 +69,10 @@ var theWrongAnswer = new Constructor('a thousand','tomatito');
 // RUN TESTS (Fiber)--
 // -------------------
 function* runTests(hostname){
+
+    console.log( yield wait.for ( fs.readFile, 'blogPost.txt', 'utf8' ) );
+    console.log( yield [ fs.readFile, 'blogPost.txt', 'utf8' ] );
+    return;
 
     console.log('--------------------------------');
     console.log('sequential_resolve_reverse_ES6');
