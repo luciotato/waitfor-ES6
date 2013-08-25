@@ -6,19 +6,21 @@ Sequential programming for node.js *and the browser*, end of callback hell.
 ***Simple, straightforward abstraction.***
 
 By using **wait.for**, you can call any nodejs standard async function in sequential/Sync mode, waiting for result data, 
-without blocking node's event loop
+without blocking node's event loop.
 
 A nodejs standard async function is a function in which the last parameter is a callback: function(err,data)
 
-Advantages:
-* Avoid callback hell / pyramid of doom
-* Simpler, sequential programming when required, without blocking node's event loop
-* Simpler, try-catch exception programming. (default callback handler is: if (err) throw err; else return data)
-* You can also launch multiple parallel non-concurrent fibers.
-* No multi-threaded debugging nightmares, only one fiber running at a given time.
-* Can use any node-standard async function with callback(err,data) as last parameter.
-* Plays along with node programming style, you write your async functions with callback(err,data), but you can use them in sequential/SYNC mode when required.
-* Plays along with node cluster. You design for one thread/processor, then scale with cluster on multicores.
+*Advantages:*
+<ul>
+<li> Avoid callback hell / pyramid of doom
+<li> Simpler, sequential programming when required, without blocking node's event loop
+<li> Simpler, try-catch exception programming. (default callback handler is: if (err) throw err; else return data)
+<li> You can launch multiple parallel non-concurrent fibers.
+<li> No multi-threaded debugging nightmares, only one fiber running at a given time.
+<li> Can use any node-standard async function with callback(err,data) as last parameter.
+<li> Plays along with node programming style. Write your async functions with callback(err,data), but use them in sequential/SYNC mode when required.
+<li> Plays along with node cluster. You design for one thread/processor, then scale with cluster on multicores.
+</ul>
 
 - WARNING: Bleeding Edge -
 --
@@ -37,7 +39,7 @@ Example:
 
     node --harmony waitfor-demo.js
 
-stable Wait.for
+Wait.for on stable Node
 --
 If you want to use ***wait.for*** but you can't use (unstable) node and/or ES6-Harmony
 you can try the<br>
@@ -90,7 +92,7 @@ function* test(){
 
 wait.launchFiber(test); 
 ```
-Alternative, **fancy syntax**, *omiting* **wait.for** (see [The funny thing is...](#funny))
+Alternative, **fancy syntax**, *omiting* **wait.for** (see [The funny thing is...](#the-funny-thing-is))
 ```javascript
 var dns = require("dns"), wait=require('wait.for-ES6');
 
@@ -140,7 +142,7 @@ to respond to the user. If somebody like to fix this example... be my guest.
 
 ***THE SAME CODE***, using **wait.for** (sequential logic - sequential programming):
 ```javascript
-var db = require("some-db-abstraction"), wait=require('wait.for');
+var db = require("some-db-abstraction"), wait=require('wait.for-ES6');
 
 function* handleWithdrawal(req,res){  
 	try {
@@ -165,12 +167,12 @@ More examples:
 
 * see [tests.js] (http://github.com/luciotato/waitfor-ES6/blob/master/tests.js) for more examples
 * see [waitfor-demo.js](http://github.com/luciotato/waitfor/blob/master/waitfor-demo.js.js) for a 
-dummy blog server demo using sequential programming
+dummy server demo using sequential programming
 
 Usage: 
 -
 ```javascript
-var wait=require('wait.for');
+var wait=require('wait.for-ES6');
 
 // launch a new fiber (emulated by a generator)
 wait.launchFiber(my_seq_function, arg,arg,...)
@@ -194,14 +196,15 @@ function* handler(req,res){
 ```
 
 
-<a id="funny"></a>The funny thing is...
+The funny thing is...
 --
 After uploading the original **wait.for** based on node-fibers, several people ask me: "why not base it on ES6-Harmony generators?". So I started looking for information on such a migration. 
 After a quick search, the migration did not seem possible:
 (According to this: http://stackoverflow.com/questions/18293563/can-node-fibers-be-implemented-using-es6-generators
 and this: http://calculist.org/blog/2011/12/14/why-coroutines-wont-work-on-the-web)
 
-Anyway, the basic tools of ES6 generators were very similar to the concept of fibers, so I started trying to port **wait.for** to ES6...
+However, the basic building blocks of ES6 generators are the same for the concept of fibers, 
+so I started trying to port **wait.for** to ES6...
 
 It didn't looked good, ***but it went much better than expected!***
 
@@ -231,7 +234,8 @@ You use ***wait.for*** inside a generator (function*) in conjunction with new JS
 var data = yield wait.for ( fs.readFile, '/etc/somefile' );
 ```
 
-<h2>Surprisingly, ES6 based implementation of <i>wait.for</i> is almost a no-op, you can even completely omit it...</h2></blockquote>
+<h2>Surprisingly, ES6 generators-based implementation of <i>function wait.for(asyncFn)</i> 
+is almost a no-op, you can even completely omit it calling it...</h2></blockquote>
 
 Given that evaluating ***wait.for*** return its arguments, the call can be replaced with an object literal, which is an array-like object. It results that:
 ```javascript
@@ -244,12 +248,10 @@ so, the following two snippets are equivalent (inside a generator launched via *
 
 ```javascript
 // call an async function and wait for results, (wait.for syntax):
-var data = yield wait.for ( fs.readFile, '/etc/somefile', 'utf8' );
-console.log(data);
+console.log( yield wait.for ( fs.readFile, '/etc/somefile', 'utf8' ) );
 
 // call an async function and wait for results, (fancy syntax):
-var data = yield [ fs.readFile, '/etc/passwd', 'utf8' ];
-console.log(data);
+console.log( yield [ fs.readFile, '/etc/passwd', 'utf8' ] );
 ```
 
 
@@ -259,4 +261,4 @@ Roadmap
  * Parallel execution, launch one fiber for each array item, waits until all fibers complete execution.
    * **function parallel.map(arr,fn,callback)** return transformed array;
    * **function parallel.filter(arr,fn,callback)** return filtered array;
-   * Status: ***WORKING PROTOYPES*** in [paralell-tests.js](http://github.com/luciotato/waitfor-ES6/blob/master/paralell-tests.js)
+   * Status: ***WORKING PROTOYPES*** in [parallel-tests.js](http://github.com/luciotato/waitfor-ES6/blob/master/parallel-tests.js)
