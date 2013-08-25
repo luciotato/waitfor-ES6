@@ -203,7 +203,8 @@ After a quick search, the migration did not seem possible:
 (According to this: http://stackoverflow.com/questions/18293563/can-node-fibers-be-implemented-using-es6-generators
 and this: http://calculist.org/blog/2011/12/14/why-coroutines-wont-work-on-the-web)
 
-Anyway, the basic tools of ES6 generators were very similar to the concept of fibers, so I started trying to port **wait.for** to ES6...
+However, the basic building blocks of ES6 generators are the same for the concept of fibers, 
+so I started trying to port **wait.for** to ES6...
 
 It didn't looked good, ***but it went much better than expected!***
 
