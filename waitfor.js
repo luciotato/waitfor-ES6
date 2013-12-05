@@ -1,11 +1,11 @@
-/* node wait.for - based on ES6-harmony generators 
+/* node wait.for-ES6 - based on ES6-harmony generators 
  - Sequential programming for node.js - end of callback hell
  - Copyright 2013 Lucio Tato
 
  -- WARNING: bleeding edge --
  This lib is based on ECMAScript 6, 
- which is the next version of the javascript standard, code-named "Harmony",
- with a target release date of December 2013.
+ the next version of the javascript standard, code-named "Harmony".
+ (release target date December 2013).
 
  This lib also uses bleeding edge v8 Harmony features, so you’ll need to
  use the latest -unstable- nodejs version wich today is v0.11.6 
@@ -15,9 +15,7 @@
 
  If you want to use "wait.for" but you can't use (unstable) node and/or ES6-Harmony
  you can use the Fibers-based version of wait.for 
-
  at:  http://github.com/luciotato/waitfor
-
  The Fibers-based version of wait.for only requires node-fibers(stable), and node >= 0.5.2 
 
 */
@@ -126,8 +124,6 @@ var Wait = {
     }
 
     ,forMethod: function(obj,methodName){ // wait.forMethod(dbObj,'select',....)
-
-        if (typeof obj !== 'object') throw new Error('wait.forMethod: first argument must be an object');
 
         var method=obj[methodName];
         if (!method) throw new Error('wait.forMethod: second argument must be the async method name (string)');

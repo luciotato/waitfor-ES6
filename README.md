@@ -27,17 +27,15 @@ A nodejs standard async function is a function in which the last parameter is a 
 
 This is a port of the original [Wait.for] (http://github.com/luciotato/waitfor),
 now implemented using ***the upcoming*** javascript/ES6-Harmony generators.
-It requires ***bleeding edge unstable node v0.11.6, plus the --harmony command line option***
+It requires ***bleeding edge node v0.11.6, with --harmony command line option***
 
-This lib is based on ECMAScript 6, which is the next version of the javascript standard, code-named "Harmony",
-with a target release date of December 2013.
+This lib is based on ECMAScript 6 "Harmony", the next version of the javascript standard, target release date December 2013.
 
-This lib also uses bleeding edge V8 Harmony features, so you’ll need to use the latest (unstable) nodejs version (v0.11.6)
-and also pass the --harmony flag when executing node.
+This lib also uses bleeding edge V8 Harmony features, so you’ll need to use the latest (unstable) nodejs version (v0.11.6) and also pass the --harmony flag when executing node.
 
 Example:
 
-    node --harmony waitfor-demo.js
+    node --harmony blogServer.js
 
 Wait.for on stable Node
 --
@@ -56,7 +54,7 @@ Examples:
 ```javascript
 // (inside a generator) call async function fs.readfile(path,enconding), 
 // wait for result, return data
-console.log('contents of file: ', yield [ fs.readfile, '/etc/file.txt', 'utf8']);
+console.log('contents of file: ', yield wait.for(fs.readfile, '/etc/file.txt', 'utf8'));
 ```
 
 DNS testing, *using pure node.js* (a little of callback hell):

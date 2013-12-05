@@ -1,0 +1,19 @@
+h1 {
+    font: 20pt Tahoma;
+    background-color: lightgray;
+    border: 2px solid gray;
+    padding: 8px;
+}
+
+h2 {
+    font: 16pt Tahoma;
+    color: darkgray;
+    padding-left: 8px;
+}
+
+p {
+    font: 11pt Tahoma;
+    padding-left: 8px;
+}
+
+
