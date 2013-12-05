@@ -30,20 +30,24 @@ wait.helper.fiberForItem = function*(asyncItemFn,item,inx,result,finalCallback){
     }
 };
 
-//async parallel map
-parallel.map = function(arr,asyncItemFn,finalCallback){
+// -------------
+// parallel.map
+// -------------
+// mapFn will be started for each item
+// when all the functions complete, finalCallback will be called
+//
+// parallel.map can be waited.for, as in: 
+// mappedArr = yield wait.for(parallel.map, arr, translateFn);
+//
+parallel.map = function(arr,mapFn,finalCallback){
     //
-    // asyncItemFn = function(item,callback) -> callback(err,data) returns item transformed
-    //
-    // can be called with yield, as in: 
-    // mappedArr = yield wait.for(parallel.map,arr,testFn);
+    // mapFn = function*(item,index) -> returns item transformed
     //
     var result={arr:[],count:0,expected:arr.length};
     if (result.expected===0) return finalCallback(null,result.arr);
 
     for (var i = 0; i < arr.length; i++) {
-        wait.launchFiber(wait.helper.fiberForItem
-            ,asyncItemFn,arr[i],i,result,finalCallback);
+        wait.launchFiber(mapFn,arr[i],i,result,finalCallback);
     };
 
 };
