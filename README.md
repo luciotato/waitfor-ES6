@@ -83,7 +83,7 @@ test();
 ```
 ***THE SAME CODE***, using **wait.for** (sequential): 
 ```javascript
-var dns = require("dns"), wait=require('wait.for-ES6');
+var dns = require("dns"), wait=require('wait.for-es6');
 
 function* test(){
 	var addresses = yield wait.for(dns.resolve4,"google.com");
@@ -97,7 +97,7 @@ wait.launchFiber(test);
 ```
 Alternative, **fancy syntax**, *omiting* **wait.for** (see [The funny thing is...](#the-funny-thing-is))
 ```javascript
-var dns = require("dns"), wait=require('wait.for-ES6');
+var dns = require("dns"), wait=require('wait.for-es6');
 
 function* test(){
     var addresses = yield [dns.resolve4, "google.com"];
@@ -145,7 +145,7 @@ to respond to the user. If somebody like to fix this example... be my guest.
 
 ***THE SAME CODE***, using **wait.for** (sequential logic - sequential programming):
 ```javascript
-var db = require("some-db-abstraction"), wait=require('wait.for-ES6');
+var db = require("some-db-abstraction"), wait=require('wait.for-es6');
 
 function* handleWithdrawal(req,res){  
 	try {
@@ -163,21 +163,20 @@ function* handleWithdrawal(req,res){
 }  
 ```
 
-Note: Exceptions will be catched as expected. (not fully tested yet, -bleeding edge-, remember?). 
+Note: Exceptions will be catched as expected. 
 db methods (db.select, db.execute) will be called with this=db 
 
 More examples:
 
-* see [tests.js] (http://github.com/luciotato/waitfor-ES6/blob/master/tests.js) for more examples
-* see [waitfor-demo.js](http://github.com/luciotato/waitfor/blob/master/waitfor-demo.js.js) for a 
-dummy server demo using sequential programming
+* see  [blogServer] (http://github.com/luciotato/waitfor-ES6/blob/master/blogServer) 
+* see  [ajaxServer] (http://github.com/luciotato/waitfor-ES6/blob/master/ajaxServer) 
 
 Usage: 
 -
 ```javascript
-var wait=require('wait.for-ES6');
+var wait=require('wait.for-es6');
 
-// launch a new fiber (emulated by a generator)
+// launch a new fiber 
 wait.launchFiber(my_seq_function, arg,arg,...)
 
 // fiber (generator)
@@ -270,4 +269,4 @@ Roadmap
  * Parallel execution, launch one fiber for each array item, waits until all fibers complete execution.
    * **function parallel.map(arr,fn,callback)** return transformed array;
    * **function parallel.filter(arr,fn,callback)** return filtered array;
-   * Status: ***WORKING PROTOYPES*** in complementary lib [parallel.js](http://github.com/luciotato/parallel-ES6)
+   * Status: *BETA* in complementary lib [parallel.js](http://github.com/luciotato/parallel-ES6)
