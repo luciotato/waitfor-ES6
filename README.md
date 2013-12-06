@@ -52,7 +52,7 @@ which only requires node >= 0.5.2, and the stable package [node-fibers](https://
 
 Install: 
 -
-        npm install wait.for-ES6 
+        npm install wait.for-es6 
 
 Examples:
 -
