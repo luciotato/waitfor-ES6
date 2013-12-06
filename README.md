@@ -10,8 +10,8 @@ without blocking node's event loop.
 
 Definitions:
 --
-A nodejs standard async function is a function in which the last parameter is a callback: function(err,data)
-A "fiber" in this context is a "generator" that yields async callable functions.
+* A nodejs standard async function is a function in which the last parameter is a callback: function(err,data)
+* A "fiber" in this context is a "generator" that yields async callable functions.
 
 
 *Advantages:*
