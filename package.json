@@ -1,6 +1,6 @@
 {
-  "name" : "wait.for-es6",
-  "version" : "0.0.1",
+  "name" : "wait.for-ES6",
+  "version" : "0.0.2",
   "description" : "Sequential programming for node.js -and the browser-. End of callback hell - Original Wait.for, implemented using upcoming javascript/ES6-Harmony generators",
   "author" : {
     "name" : "Lucio Tato",
