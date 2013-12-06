@@ -12,13 +12,13 @@ function translateAsync(text, callback){
   // and can take a while
   setTimeout(function(){
     if (Math.random()>0.8) return callback(new Error('ocassional error, translate server down, catch it! - try again'));
-    return callback(null,'<i>Latin:</i>'+text);
+    return callback(null,'<i>Latin: </i>'+text);
    }
    ,200)
 }
 
 //------------------------------
-function formatPost(post, callback){
+function formatPost(post, callback){ 
 
   var lines=post.split('\n');
   
@@ -106,3 +106,4 @@ var server = http.createServer(
   
 console.log('server started on port', 8000);
 
+

@@ -1,7 +1,7 @@
 "use strict";
 var util = require("util");
 var fs = require('fs'), dns = require("dns");
-var wait = require("./waitfor");
+var wait = require("../waitfor");
 
 
 // ----------------------

@@ -8,7 +8,11 @@ Sequential programming for node.js *and the browser*, end of callback hell.
 By using **wait.for**, you can call any nodejs standard async function in sequential/Sync mode, waiting for result data, 
 without blocking node's event loop.
 
+Definitions:
+--
 A nodejs standard async function is a function in which the last parameter is a callback: function(err,data)
+A "fiber" in this context is a "generator" that yields async callable functions.
+
 
 *Advantages:*
 <ul>
@@ -35,7 +39,8 @@ This lib also uses bleeding edge V8 Harmony features, so you’ll need to use th
 
 Example:
 
-    node --harmony blogServer.js
+    cd samples/blogServer
+    node --harmony server.js
 
 Wait.for on stable Node
 --
@@ -45,7 +50,7 @@ you can try the<br>
 which only requires node >= 0.5.2, and the stable package [node-fibers](https://github.com/laverdet/node-fibers)
 
 
-Install (not yet): 
+Install: 
 -
         npm install wait.for-ES6 
 
@@ -193,6 +198,12 @@ function* handler(req,res){
 }
 ```
 
+Samples
+--
+Check folder "samples"
+  - blogServer
+  - ajaxServer
+
 
 The funny thing is...
 --
@@ -259,4 +270,4 @@ Roadmap
  * Parallel execution, launch one fiber for each array item, waits until all fibers complete execution.
    * **function parallel.map(arr,fn,callback)** return transformed array;
    * **function parallel.filter(arr,fn,callback)** return filtered array;
-   * Status: ***WORKING PROTOYPES*** in [parallel-tests.js](http://github.com/luciotato/waitfor-ES6/blob/master/parallel-tests.js)
+   * Status: ***WORKING PROTOYPES*** in complementary lib [parallel.js](http://github.com/luciotato/parallel-ES6)

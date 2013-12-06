@@ -1,32 +1,29 @@
 {
-  "name": "wait.for-es6"
-  ,"version": "0.0.1"
-  ,"description": "Sequential programming for node.js -and the browser-. End of callback hell - Original Wait.for, implemented using upcoming javascript/ES6-Harmony generators"
-  
-  ,"author": {
-    "name": "Lucio Tato"
-    ,"email": "luciotato@gmail.com"
-    ,"url":"http://github.com/luciotato"
-  }
-  ,"keywords": [
-    "fiber", "fibers", "generator", "coroutine", "thread", "sycn", "async"
-    ,"parallel", "worker", "future", "promise"
-    ,"wait","Wait.for","callback hell","piramyd of doom"]
-    
-  ,"homepage": "http://github.com/luciotato/waitfor-ES6"
-  ,"license" : "Creative Commons, MIT"
-  ,"bugs": "http://github.com/luciotato/waitfor-ES6/issues"
-  ,"repository": {
-    "type": "git"
-    ,"url": "git://github.com/luciotato/waitfor-ES6.git"
-  }
-  ,"main": "waitfor.js"
-  , "engines": { 
-  	"node": ">=0.11.6" 
-  	}
- ,"scripts": {
-    "test": "node --harmony tests"
-    ,"parallel": "node --harmony parallel-tests"
-    ,"demo": "node --harmony waitfor-demo"
+  "name" : "wait.for-es6",
+  "version" : "0.0.1",
+  "description" : "Sequential programming for node.js -and the browser-. End of callback hell - Original Wait.for, implemented using upcoming javascript/ES6-Harmony generators",
+  "author" : {
+    "name" : "Lucio Tato",
+    "email" : "luciotato@gmail.com",
+    "url" : "http://github.com/luciotato"
+  },
+  "keywords" : [ "fiber", "fibers", "generator", "coroutine", "thread", "sycn", "async", "parallel", "worker", "future", "promise", "wait", "Wait.for", "callback hell", "piramyd of doom" ],
+  "homepage" : "http://github.com/luciotato/waitfor-ES6",
+  "license" : "Creative Commons, MIT",
+  "bugs" : {
+    "url" : "http://github.com/luciotato/waitfor-ES6/issues"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/luciotato/waitfor-ES6.git"
+  },
+  "main" : "./waitfor.js",
+  "engines" : {
+    "node" : ">=0.11.6"
+  },
+  "scripts" : {
+    "test" : "node --harmony tests",
+    "parallel" : "node --harmony parallel-tests",
+    "demo" : "node --harmony waitfor-demo"
   }
 }

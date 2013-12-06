@@ -1,0 +1,3 @@
+node -v
+echo NODE version should be at least 0.11.6
+node --harmony --debug server
