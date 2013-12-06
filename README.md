@@ -236,8 +236,8 @@ You use ***wait.for*** inside a generator (function*) in conjunction with new JS
 var data = yield wait.for ( fs.readFile, '/etc/somefile' );
 ```
 
-<h2>Surprisingly, ES6 generators-based implementation of <i>function wait.for(asyncFn)</i> 
-is almost a no-op, you can even completely omit it calling it...</h2></blockquote>
+<h3>Surprisingly, ES6 generators-based implementation of <i>function wait.for(asyncFn)</i> 
+is almost a no-op, you can even omit it...</h3></blockquote>
 
 Given that evaluating ***wait.for*** return its arguments, the call can be replaced with an object literal, which is an array-like object. It results that:
 ```javascript
