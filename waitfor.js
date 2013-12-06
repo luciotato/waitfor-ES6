@@ -26,6 +26,8 @@ var Wait = {
 
     launchFiber: function(generatorFn){ // wait.launchFiber(fn,arg1,arg2...)
 
+        //console.log(Array.prototype.slice.call(arguments));
+        
         // starts a generator (emulating a fiber)
 
         // helper function, call the async, using theCallback as callback
@@ -45,7 +47,7 @@ var Wait = {
         var finalCallback=null; //optional
 
         if (typeof generatorFn !== 'function') {
-            if (generatorFn==='async') { //1st param is string 'async'
+            if (generatorFn==='onComplete') { //1st param is string 'onComplete'
                 //special mode: second parameter is finalCallback tp signal completion of the iterator
                 finalCallback=newArgs.shift(); //remove 2nd param finalCallback
                 generatorFn=newArgs.shift(); //remove. 3rd param is generatorFn
@@ -79,7 +81,7 @@ var Wait = {
 
             //after the next part of the generator runs...
             if (nextPart.done) {//the generator function has finished (executed "return")
-                finalCallback && finalCallback();
+                finalCallback && finalCallback(null, {result:nextPart.value, iterator:thisIterator}); //final callback ok
                 return; //it was the last part, nothing more to do
             }
 
@@ -96,17 +98,9 @@ var Wait = {
 
         // launching the Fiber:
         // RUN first part of generator
-        var firstPart = thisIterator.next(); //run first part upto a yield wait.for(...
-        if (firstPart.done) { //only one part, no 'yield' found
-            finalCallback && finalCallback();
-            return;
-        }
-
-        // generator yielded, syntax is "yield wait.for(asyncFn,args...)", so yield send us the result of wait.for
-        // The result of wait.for is wait.for's arguments.
-        // Let's call the indicated async, using thisIterator.defaultCallback as callback
-        callTheAsync(firstPart.value, thisIterator.defaultCallback); 
-        // the async function callback will be handled by the above closure (thisIterator.defaultCallback) 
+        thisIterator.defaultCallback();
+        
+        return thisIterator; //launchFiber returns created iterator
     }
 
     ,for: function(asyncFn){ // wait.for(asyncFn,arg1,arg2,...)
@@ -138,14 +132,14 @@ var Wait = {
         // helper closure asyncFiber
         function async_launchFiber(generatorFnAndParams, finalCallback){ // 
             try{
-                generatorFnAndParams.unshift('async',finalCallback); // insert 'async',finalCallback
+                generatorFnAndParams.unshift('onComplete',finalCallback); // insert 'onComplete',finalCallback
                 //console.log('async_launchFiber',generatorFnAndParams);
-                Wait.launchFiber.apply(null,generatorFnAndParams) // wait.launchFiber
-                // 'async' makes Wait.launchFiber to call finalCallback at generator:done
+                Wait.launchFiber.apply(null, generatorFnAndParams) // wait.launchFiber, call with all params
+                // 'onComplete' makes Wait.launchFiber to call finalCallback at generator:done
                 // so asyncFiber can signal completion
             }
             catch(err){
-                console.log('c ERR async_launchFiber',err.message);
+                console.log('ERR async_launchFiber',err.message);
                 return finalCallback(err);
             }
         }
