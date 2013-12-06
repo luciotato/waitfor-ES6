@@ -168,8 +168,8 @@ db methods (db.select, db.execute) will be called with this=db
 
 More examples:
 
-* see  [blogServer] (http://github.com/luciotato/waitfor-ES6/blob/master/blogServer) 
-* see  [ajaxServer] (http://github.com/luciotato/waitfor-ES6/blob/master/ajaxServer) 
+* see  [blogServer] (http://github.com/luciotato/waitfor-ES6/tree/master/samples/blogServer) 
+* see  [ajaxServer] (http://github.com/luciotato/waitfor-ES6/tree/master/samples/ajaxServer) 
 
 Usage: 
 -
@@ -196,12 +196,6 @@ function* handler(req,res){
     res.end ( markdown ( yield [ fs.readfile, 'post-'+req.query.postnum, 'utf8' ] );
 }
 ```
-
-Samples
---
-Check folder "samples"
-  - blogServer
-  - ajaxServer
 
 
 The funny thing is...
