@@ -1,6 +1,6 @@
 {
   "name" : "wait.for-es6",
-  "version" : "0.0.2",
+  "version" : "0.0.3",
   "description" : "Sequential programming for node.js -and the browser-. End of callback hell - Original Wait.for, implemented using upcoming javascript/ES6-Harmony generators",
   "author" : {
     "name" : "Lucio Tato",
@@ -22,7 +22,7 @@
     "node" : ">=0.11.6"
   },
   "scripts" : {
-    "test" : "node --harmony tests",
+    "test" : "node --harmony test/test",
     "parallel" : "node --harmony parallel-tests",
     "demo" : "node --harmony waitfor-demo"
   }
