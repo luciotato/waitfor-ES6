@@ -168,8 +168,9 @@ db methods (db.select, db.execute) will be called with this=db
 
 More examples:
 
-* see  [blogServer] (http://github.com/luciotato/waitfor-ES6/tree/master/samples/blogServer) 
-* see  [ajaxServer] (http://github.com/luciotato/waitfor-ES6/tree/master/samples/ajaxServer) 
+* see  [blogServer] (samples/blogServer) 
+* see  [ajaxServer] (samples/ajaxServer) 
+* see  [uglifydir] (samples/uglifydir) uglify each file on a dir, sequential execution
 
 Usage: 
 -
@@ -195,6 +196,16 @@ function* my_seq_function(arg,arg...){
 function* handler(req,res){
     res.end ( markdown ( yield [ fs.readfile, 'post-'+req.query.postnum, 'utf8' ] );
 }
+
+//run a fiber to completion (runGenerator)
+
+function* mainProcess(){
+
+    yield wait.runGenerator(my_seq_function,'test','out',options);
+
+};
+
+
 ```
 
 
