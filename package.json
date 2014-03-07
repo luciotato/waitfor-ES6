@@ -7,7 +7,7 @@
     "email" : "luciotato@gmail.com",
     "url" : "http://github.com/luciotato"
   },
-  "keywords" : [ "fiber", "fibers", "generator", "coroutine", "thread", "sycn", "async", "parallel", "worker", "future", "promise", "wait", "Wait.for", "callback hell", "piramyd of doom" ],
+  "keywords" : [ "fiber", "fibers", "generator", "coroutine", "thread", "sycn", "async", "parallel", "worker", "future", "promise", "wait", "Wait.for", "callback hell", "pyramid of doom" ],
   "homepage" : "http://github.com/luciotato/waitfor-ES6",
   "license" : "Creative Commons, MIT",
   "bugs" : {
